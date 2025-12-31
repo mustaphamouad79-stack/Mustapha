@@ -1,0 +1,63 @@
+:root {
+    --gold: #d4af37;
+    --dark: #0f0f0f;
+    --light-dark: #1a1a1a;
+    --white: #ffffff;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo', sans-serif; }
+body { background: var(--dark); color: var(--white); scroll-behavior: smooth; }
+
+/* Scrolling Top Bar */
+.scrolling-bar { background: var(--gold); color: black; padding: 10px; text-align: center; font-weight: bold; font-size: 14px; position: sticky; top:0; z-index: 1001; }
+
+/* Header */
+header { background: rgba(0,0,0,0.95); padding: 20px 8%; border-bottom: 1px solid #222; position: sticky; top: 40px; z-index: 1000; }
+.header-container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 28px; font-weight: 900; }
+.logo span { color: var(--gold); }
+.main-nav ul { display: flex; list-style: none; gap: 30px; }
+.main-nav a { color: white; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; }
+.main-nav a:hover { color: var(--gold); }
+.nav-extra { display: flex; align-items: center; gap: 20px; font-size: 20px; cursor: pointer; }
+
+/* Hero */
+.hero-full { height: 90vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1600') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; }
+.hero-overlay h1 { font-size: 4rem; margin-bottom: 20px; }
+.btn-primary { padding: 15px 40px; background: var(--gold); color: black; font-weight: bold; border-radius: 50px; text-decoration: none; margin: 10px; display: inline-block; }
+.btn-secondary { padding: 15px 40px; border: 2px solid white; color: white; font-weight: bold; border-radius: 50px; text-decoration: none; margin: 10px; display: inline-block; }
+
+/* Leagues Grid */
+.leagues { padding: 100px 8%; }
+.title-main { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--gold); }
+.leagues-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.league-card { height: 350px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.5rem; background-size: cover; cursor: pointer; position: relative; }
+.league-card::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.5); border-radius: 15px; }
+.league-card span { z-index: 1; }
+.la-liga { background-image: url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=500'); }
+.premier { background-image: url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=500'); }
+
+/* Products */
+.shop-grid-section { padding: 50px 8%; background: var(--light-dark); }
+.products-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+.item-card { background: var(--dark); border-radius: 20px; overflow: hidden; }
+.item-img { height: 400px; position: relative; }
+.item-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; transition: 0.5s; }
+.b-img { opacity: 0; }
+.item-card:hover .b-img { opacity: 1; }
+.item-card:hover .f-img { opacity: 0; }
+.item-desc { padding: 25px; text-align: center; }
+.price { display: block; font-size: 1.8rem; font-weight: 900; color: var(--gold); margin: 15px 0; }
+.add-btn { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; border-radius: 10px; cursor: pointer; }
+
+/* Offer Banner */
+.offer-banner { padding: 100px 8%; background: linear-gradient(45deg, #d4af37, #8a6d1a); text-align: center; color: black; }
+.btn-wa-offer { padding: 15px 40px; background: black; color: white; text-decoration: none; border-radius: 10px; font-weight: bold; margin-top: 20px; display: inline-block; }
+
+/* Cart Side */
+.cart-side { position: fixed; right: -100%; top: 0; width: 400px; height: 100%; background: #000; z-index: 2000; padding: 30px; transition: 0.5s; }
+.cart-side.active { right: 0; }
+
+/* Footer */
+footer { padding: 80px 8%; background: #000; border-top: 1px solid #222; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; }
