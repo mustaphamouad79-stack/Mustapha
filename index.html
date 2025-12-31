@@ -3,84 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M.M SHOP | Official Jersey Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>M.M - ملابس رياضية ورجالية أصلية</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-    <header class="navbar">
-        <div class="container flex-nav">
-            <div class="logo">M.M<span>STATION</span></div>
-            <nav class="nav-links">
-                <a href="#home" data-key="home">الرئيسية</a>
-                <a href="#shop" data-key="shop">المتجر</a>
-                <a href="#contact" data-key="contact">اتصل بنا</a>
-            </nav>
-            <div class="nav-actions">
-                <button id="lang-btn" onclick="toggleLanguage()">FR</button>
-                <div class="cart-icon" onclick="toggleCart()">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span id="cart-count">0</span>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h2><i class="fas fa-dumbbell"></i> M.M</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">الرئيسية</a></li>
+                    <li class="nav-item"><a href="#products" class="nav-link">المنتجات</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">عنا</a></li>
+                    <li class="nav-item"><a href="#categories" class="nav-link">الفئات</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">اتصل بنا</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <i class="fas fa-search search-btn" id="searchBtn"></i>
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
-        </div>
+        </nav>
     </header>
 
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-content">
+            <span class="close-search" id="closeSearch">&times;</span>
+            <input type="text" placeholder="ابحث عن منتجات..." id="searchInput">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <span class="close-cart" id="closeCart">&times;</span>
+            <h3>سلة التسوق</h3>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-total">
+                <h4>الإجمالي: <span id="cartTotal">0</span> ريال</h4>
+            </div>
+            <button class="checkout-btn">الدفع الآن</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-slider">
+            <div class="slide active">
+                <div class="hero-content">
+                    <h1>ملابس رياضية أصلية</h1>
+                    <p>اكتشف أحدث صيحات الملابس الرياضية بجودة عالية</p>
+                    <a href="#products" class="cta-btn">تسوق الآن</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="hero-content">
+                    <h1>ملابس رجالية عصرية</h1>
+                    <p>أناقة وراحة في كل قطعة</p>
+                    <a href="#products" class="cta-btn">اكتشف المجموعة</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="hero-content">
+                    <h1>تخفيضات تصل إلى 50%</h1>
+                    <p>لا تفوت الفرصة، تسوق الآن!</p>
+                    <a href="#products" class="cta-btn">عروض خاصة</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <span class="nav-dot active" data-slide="0"></span>
+            <span class="nav-dot" data-slide="1"></span>
+            <span class="nav-dot" data-slide="2"></span>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="products-section">
         <div class="container">
-            <div class="hero-content">
-                <h1 data-key="hero-title">البس قميص فريقك المفضل بجودة عالية</h1>
-                <p data-key="hero-desc">تشكيلة 2024/2025 للأندية والمنتخبات (Player Edition)</p>
-                <div class="hero-btns">
-                    <a href="#shop" class="btn-gold" data-key="shop-now">تسوق الآن</a>
-                    <a href="https://wa.me/212710211532" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <h2 class="section-title">المنتجات المميزة</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categories" class="categories-section">
+        <div class="container">
+            <h2 class="section-title">الفئات</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="sport">
+                    <i class="fas fa-running"></i>
+                    <h3>رياضية</h3>
+                </div>
+                <div class="category-card" data-category="casual">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>كاجوال</h3>
+                </div>
+                <div class="category-card" data-category="formal">
+                    <i class="fas fa-suitcase"></i>
+                    <h3>رسمي</h3>
+                </div>
+                <div class="category-card" data-category="accessories">
+                    <i class="fas fa-watch"></i>
+                    <h3>إكسسوارات</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="filters container">
-        <button class="f-btn active" onclick="filterShop('all')" data-key="all">الكل</button>
-        <button class="f-btn" onclick="filterShop('club')" data-key="clubs">الأندية</button>
-        <button class="f-btn" onclick="filterShop('national')" data-key="national">المنتخبات</button>
-    </div>
-
-    <section id="shop" class="shop container">
-        <div class="product-grid" id="product-list">
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>عن M.M</h2>
+                    <p>نحن في M.M نؤمن بتقديم أفضل الملابس الرياضية والرجالية بجودة عالمية. تجمع مجموعتنا بين الأناقة والراحة لتناسب جميع الأذواق والمناسبات.</p>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3>5000+</h3>
+                            <p>منتج مرضي</p>
+                        </div>
+                        <div class="stat">
+                            <h3>10000+</h3>
+                            <p>عميل سعيد</p>
+                        </div>
+                        <div class="stat">
+                            <h3>24/7</h3>
+                            <p>دعم العملاء</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&h=600&fit=crop" alt="M.M Store">
+                </div>
             </div>
+        </div>
     </section>
 
-    <div id="cart-panel" class="cart-panel">
-        <div class="cart-header">
-            <h2 data-key="cart-title">حقيبة المشتريات</h2>
-            <button onclick="toggleCart()">&times;</button>
-        </div>
-        <div id="cart-items" class="cart-body"></div>
-        <div class="cart-footer">
-            <div class="total-line">
-                <span data-key="total">المجموع:</span>
-                <span id="total-price">0</span> DH
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>العنوان</h4>
+                            <p>الرياض، المملكة العربية السعودية</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p>+966 50 123 4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>info@mm-store.com</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="اسمك" required>
+                    <input type="email" placeholder="بريدك الإلكتروني" required>
+                    <textarea placeholder="رسالتك" rows="5" required></textarea>
+                    <button type="submit">إرسال</button>
+                </form>
             </div>
-            <button class="checkout-btn" onclick="checkout()"><i class="fab fa-whatsapp"></i> <span data-key="order-wa">إتمام الطلب</span></button>
         </div>
-    </div>
-    <div id="overlay" onclick="toggleCart()"></div>
+    </section>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-box">
-                <div class="logo">M.M<span>STATION</span></div>
-                <p>متجركم الأول لأقمصة كرة القدم Premium في المغرب.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>M.M</h3>
+                    <p>متجرك المفضل للملابس الرياضية والرجالية الأصلية.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#products">المنتجات</a></li>
+                        <li><a href="#categories">الفئات</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>خدمات العملاء</h4>
+                    <ul>
+                        <li><a href="#">الدعم</a></li>
+                        <li><a href="#">الإرجاع</a></li>
+                        <li><a href="#">الشحن</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-box">
-                <h4 data-key="contact-info">تواصل معنا</h4>
-                <p><i class="fab fa-whatsapp"></i> +212 710-211532</p>
-                <p><i class="fab fa-instagram"></i> @shop.everything_99</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 M.M جميع الحقوق محفوظة. [web:2][web:4]</p>
             </div>
         </div>
-        <div class="bottom-bar">&copy; 2025 M.M SHOP - All Rights Reserved</div>
     </footer>
 
     <script src="script.js"></script>
