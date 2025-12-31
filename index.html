@@ -3,245 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M.M SHOP | متجرك الأول لقمصان كرة القدم</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>M.M SHOP | Official Jersey Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="top-ticker">
-        <span>شحن مجاني لجميع الطلبات فوق 500 درهم! 🚀 توصيل سريع وآمن لجميع مدن المغرب 🇲🇦</span>
-    </div>
-
-    <header class="main-header">
-        <div class="header-content">
-            <div class="logo">M.M<span>SHOP</span></div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#about">قصتنا</a></li>
-                    <li><a href="#leagues">الدوريات</a></li>
-                    <li><a href="#products">المنتجات</a></li>
-                    <li><a href="#reviews">آراء الزبناء</a></li>
-                    <li><a href="#faq">مساعدة</a></li>
-                </ul>
+    <header class="navbar">
+        <div class="container flex-nav">
+            <div class="logo">M.M<span>STATION</span></div>
+            <nav class="nav-links">
+                <a href="#home" data-key="home">الرئيسية</a>
+                <a href="#shop" data-key="shop">المتجر</a>
+                <a href="#contact" data-key="contact">اتصل بنا</a>
             </nav>
-            <div class="header-actions">
-                <a href="https://instagram.com/shop.everything_99" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <div class="nav-actions">
+                <button id="lang-btn" onclick="toggleLanguage()">FR</button>
                 <div class="cart-icon" onclick="toggleCart()">
-                    <i class="fas fa-shopping-bag"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
                     <span id="cart-count">0</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="home" class="hero-section animate__animated animate__fadeIn">
-        <div class="hero-bg"></div>
-        <div class="hero-text-content">
-            <h1 class="animate__animated animate__fadeInUp">ارتدِ شغفك: <span>قمصان أندية كرة القدم</span></h1>
-            <p class="animate__animated animate__fadeInUp animate__delay-1s">جودة الملاعب الاحترافية بين يديك. اكتشف تشكيلتنا الواسعة.</p>
-            <div class="hero-buttons animate__animated animate__fadeInUp animate__delay-2s">
-                <a href="#products" class="btn-primary">تسوق الآن <i class="fas fa-arrow-left"></i></a>
-                <a href="https://wa.me/212710211532" class="btn-secondary">تواصل معنا <i class="fab fa-whatsapp"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="about-us-section">
-        <div class="about-container">
-            <div class="about-image animate__animated animate__fadeInLeft">
-                <img src="https://images.unsplash.com/photo-1549723230-01990c74c935?q=80&w=1200&auto=format&fit=crop" alt="About Us">
-            </div>
-            <div class="about-text animate__animated animate__fadeInRight">
-                <h2>قصة <span>M.M SHOP</span></h2>
-                <p>في M.M SHOP، نحن نؤمن بأن كرة القدم أكثر من مجرد لعبة؛ إنها شغف، ثقافة، وهوية. بدأنا رحلتنا بهدف توفير أجود أقمصة الأندية العالمية لعشاق اللعبة في المغرب. كل قميص نختاره يمر عبر فحص دقيق للجودة، لنتأكد من أنه يمنحك نفس الإحساس الذي يرتديه أبطالك في الملعب.</p>
-                <p>نحن لا نبيع الملابس فحسب، بل نبيع قطعة من التاريخ، ورمزا للولاء، وتجربة رياضية لا مثيل لها.</p>
-                <a href="#why-us" class="btn-link">اكتشف مميزاتنا</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="leagues" class="leagues-section">
-        <h2 class="section-title animate__animated animate__fadeInDown">استكشف حسب <span>الدوري المفضل</span></h2>
-        <div class="leagues-grid">
-            <div class="league-card animate__animated animate__fadeInUp" data-aos-delay="100" style="background-image: url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=600');">
-                <div class="card-overlay"><h3>الدوري الإسباني</h3></div>
-            </div>
-            <div class="league-card animate__animated animate__fadeInUp" data-aos-delay="200" style="background-image: url('https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=600');">
-                <div class="card-overlay"><h3>الدوري الإنجليزي</h3></div>
-            </div>
-            <div class="league-card animate__animated animate__fadeInUp" data-aos-delay="300" style="background-image: url('https://images.unsplash.com/photo-1543351611-58f69d7c1781?q=80&w=600');">
-                <div class="card-overlay"><h3>دوري أبطال أوروبا</h3></div>
-            </div>
-            <div class="league-card animate__animated animate__fadeInUp" data-aos-delay="400" style="background-image: url('https://images.unsplash.com/photo-1579952316113-d66291bc974c?q=80&w=600');">
-                <div class="card-overlay"><h3>قمصان كلاسيكية</h3></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="products" class="products-section">
-        <h2 class="section-title animate__animated animate__fadeInDown">جديدنا: <span>الأكثر مبيعاً</span></h2>
-        <div class="product-grid">
-            
-            <div class="product-card animate__animated animate__zoomIn">
-                <div class="product-images">
-                    <img src="https://i.ibb.co/GvyhxTXF/1.jpg" alt="Borussia Front" class="front-img">
-                    <img src="https://i.ibb.co/KjGZg4Nn/2.jpg" alt="Borussia Back" class="back-img">
-                </div>
-                <div class="product-info">
-                    <h3>بوروسيا مونشنغلادباخ 24/25</h3>
-                    <p class="brand">Puma | Player Edition</p>
-                    <div class="size-selector">
-                        <select id="size-1">
-                            <option>S</option><option>M</option><option>L</option><option>XL</option>
-                        </select>
-                    </div>
-                    <span class="price">299.00 DH</span>
-                    <button class="add-to-cart-btn" onclick="addToCart('بوروسيا م.غلادباخ', 299, '1')">أضف للحقيبة</button>
-                </div>
-            </div>
-
-            <div class="product-card animate__animated animate__zoomIn animate__delay-0.5s">
-                <div class="product-images">
-                    <img src="https://i.ibb.co/qt2HMgR/3.jpg" alt="Celta Vigo Front" class="front-img">
-                    <img src="https://i.ibb.co/RGXSX1V9/4.jpg" alt="Celta Vigo Back" class="back-img">
-                </div>
-                <div class="product-info">
-                    <h3>سيلتا فيغو الاحترافي 24/25</h3>
-                    <p class="brand">Adidas | La Liga Edition</p>
-                    <div class="size-selector">
-                        <select id="size-2">
-                            <option>S</option><option>M</option><option>L</option><option>XL</option>
-                        </select>
-                    </div>
-                    <span class="price">299.00 DH</span>
-                    <button class="add-to-cart-btn" onclick="addToCart('سيلتا فيغو', 299, '2')">أضف للحقيبة</button>
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-key="hero-title">البس قميص فريقك المفضل بجودة عالية</h1>
+                <p data-key="hero-desc">تشكيلة 2024/2025 للأندية والمنتخبات (Player Edition)</p>
+                <div class="hero-btns">
+                    <a href="#shop" class="btn-gold" data-key="shop-now">تسوق الآن</a>
+                    <a href="https://wa.me/212710211532" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="special-offer-section">
-        <div class="offer-content animate__animated animate__fadeInUp">
-            <h2>عرض حصري: <span>خصم 20%</span> على قميصين!</h2>
-            <p>لا تفوت فرصة الحصول على قمصان فريقك المفضل بأسعار لا تصدق.</p>
-            <a href="https://wa.me/212710211532" class="btn-offer">اطلب العرض الآن</a>
-        </div>
-    </section>
-
-    <section id="why-us" class="why-choose-us-section">
-        <h2 class="section-title animate__animated animate__fadeInDown">لماذا تختار <span>M.M SHOP</span>؟</h2>
-        <div class="features-grid">
-            <div class="feature-item animate__animated animate__fadeInLeft">
-                <i class="fas fa-medal"></i>
-                <h3>جودة لا تضاهى</h3>
-                <p>نحرص على اختيار أجود الأقمشة والطباعة، لتدوم معك لسنوات.</p>
-            </div>
-            <div class="feature-item animate__animated animate__fadeInUp animate__delay-0.5s">
-                <i class="fas fa-truck-fast"></i>
-                <h3>توصيل سريع</h3>
-                <p>طلبيتك تصلك في أقصر وقت ممكن، أينما كنت في المغرب.</p>
-            </div>
-            <div class="feature-item animate__animated animate__fadeInRight animate__delay-1s">
-                <i class="fas fa-shield-alt"></i>
-                <h3>خدمة عملاء ممتازة</h3>
-                <p>فريقنا مستعد للإجابة على جميع استفساراتك وخدمتك.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="reviews" class="testimonials-section">
-        <h2 class="section-title animate__animated animate__fadeInDown">ماذا يقول <span>زبناؤنا</span>؟</h2>
-        <div class="testimonial-carousel">
-            <div class="testimonial-card animate__animated animate__fadeIn">
-                <p>"الجودة فاقت توقعاتي، والتوصيل كان سريع جداً. شكراً M.M SHOP على هذه التجربة الرائعة!"</p>
-                <h4>أحمد العلوي - الدار البيضاء</h4>
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-            </div>
-            <div class="testimonial-card animate__animated animate__fadeIn animate__delay-1s">
-                <p>"أقمصة بنفس جودة المحلات الكبرى، والتعامل كان احترافياً للغاية. أنصح به بشدة."</p>
-                <h4>فاطمة الزهراء - الرباط</h4>
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-            </div>
-            <div class="testimonial-card animate__animated animate__fadeIn animate__delay-2s">
-                <p>"أخيراً لقيت متجر موثوق في المغرب يوفر قمصان أصلية. سأكون زبوناً دائماً!"</p>
-                <h4>يوسف الخالد - طنجة</h4>
-                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" class="faq-section">
-        <h2 class="section-title animate__animated animate__fadeInDown">أسئلة <span>شائعة</span></h2>
-        <div class="faq-container">
-            <details class="faq-item animate__animated animate__fadeInLeft">
-                <summary>كم يستغرق توصيل الطلبات؟</summary>
-                <p>يستغرق التوصيل عادةً ما بين 24 إلى 48 ساعة للمدن الكبرى، وقد يمتد إلى 72 ساعة للمناطق البعيدة.</p>
-            </details>
-            <details class="faq-item animate__animated animate__fadeInRight">
-                <summary>هل المنتجات أصلية؟</summary>
-                <p>نعم، جميع منتجاتنا مطابقة للمواصفات الأصلية بجودة عالية جداً (Player Edition & Fan Edition).</p>
-            </details>
-            <details class="faq-item animate__animated animate__fadeInLeft">
-                <summary>كيف يمكنني تتبع طلبيتي؟</summary>
-                <p>بعد تأكيد طلبك، ستتوصل برقم تتبع عبر الواتساب، يمكنك استخدامه لتتبع طلبيتك.</p>
-            </details>
-            <details class="faq-item animate__animated animate__fadeInRight">
-                <summary>هل يمكنني استبدال المقاس؟</summary>
-                <p>نعم، يمكنك استبدال المقاس بشرط أن يكون القميص في حالته الأصلية، خلال 7 أيام من تاريخ الاستلام.</p>
-            </details>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        <div class="footer-grid">
-            <div class="footer-col about-col">
-                <div class="logo">M.M<span>SHOP</span></div>
-                <p>وجهتك الأمثل لأقمصة كرة القدم الفاخرة. نقدم لك الشغف، الجودة، والسرعة في التوصيل.</p>
-                <div class="social-links">
-                    <a href="https://instagram.com/shop.everything_99" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/212710211532" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h3>روابط سريعة</h3>
-                <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#products">المنتجات</a></li>
-                    <li><a href="#about">قصتنا</a></li>
-                    <li><a href="#faq">الأسئلة الشائعة</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>معلومات الاتصال</h3>
-                <p><i class="fas fa-phone"></i> +212 710-211532</p>
-                <p><i class="fas fa-envelope"></i> contact@mmshop.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> المغرب، الرباط</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 M.M SHOP. جميع الحقوق محفوظة.</p>
-        </div>
-    </footer>
-
-    <div id="cart-sidebar" class="cart-sidebar">
-        <div class="sidebar-header">
-            <h3>حقيبة التسوق (<span id="cart-count-sidebar">0</span>)</h3>
-            <i class="fas fa-times close-btn" onclick="toggleCart()"></i>
-        </div>
-        <div id="cart-items" class="sidebar-body">
-            </div>
-        <div class="sidebar-footer">
-            <div class="total-price">المجموع: <span id="total-val">0</span> DH</div>
-            <button class="checkout-whatsapp-btn" onclick="sendToWhatsApp()">أكمل الطلب عبر واتساب <i class="fab fa-whatsapp"></i></button>
-        </div>
+    <div class="filters container">
+        <button class="f-btn active" onclick="filterShop('all')" data-key="all">الكل</button>
+        <button class="f-btn" onclick="filterShop('club')" data-key="clubs">الأندية</button>
+        <button class="f-btn" onclick="filterShop('national')" data-key="national">المنتخبات</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <section id="shop" class="shop container">
+        <div class="product-grid" id="product-list">
+            </div>
+    </section>
+
+    <div id="cart-panel" class="cart-panel">
+        <div class="cart-header">
+            <h2 data-key="cart-title">حقيبة المشتريات</h2>
+            <button onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-body"></div>
+        <div class="cart-footer">
+            <div class="total-line">
+                <span data-key="total">المجموع:</span>
+                <span id="total-price">0</span> DH
+            </div>
+            <button class="checkout-btn" onclick="checkout()"><i class="fab fa-whatsapp"></i> <span data-key="order-wa">إتمام الطلب</span></button>
+        </div>
+    </div>
+    <div id="overlay" onclick="toggleCart()"></div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-box">
+                <div class="logo">M.M<span>STATION</span></div>
+                <p>متجركم الأول لأقمصة كرة القدم Premium في المغرب.</p>
+            </div>
+            <div class="footer-box">
+                <h4 data-key="contact-info">تواصل معنا</h4>
+                <p><i class="fab fa-whatsapp"></i> +212 710-211532</p>
+                <p><i class="fab fa-instagram"></i> @shop.everything_99</p>
+            </div>
+        </div>
+        <div class="bottom-bar">&copy; 2025 M.M SHOP - All Rights Reserved</div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
