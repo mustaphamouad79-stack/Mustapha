@@ -696,4 +696,32 @@ body {
         padding: 2rem;
         margin: 1rem;
     }
+}/* زر الواتساب العائم */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 2000;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
+.floating-whatsapp:hover {
+    transform: scale(1.1);
+    background-color: #128C7E;
+}
+
+/* ألوان التواصل الاجتماعي في الفوتر عند التحويم */
+.social-links a .fa-whatsapp:hover { color: #25D366; }
+.social-links a .fa-instagram:hover { color: #E1306C; }
+.social-links a .fa-facebook:hover { color: #1877F2; }
