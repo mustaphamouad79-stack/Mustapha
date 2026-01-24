@@ -1,85 +1,105 @@
-// Load data from LocalStorage on start
-let sales = JSON.parse(localStorage.getItem('mm_sales')) || [];
+let isLoginMode = true;
+let currentUser = null;
+let isDark = localStorage.getItem('theme') === 'dark';
 
-document.getElementById('currentDate').innerText = new Date().toLocaleDateString('ar-MA');
+// Initialiser le Thème
+if (isDark) document.body.classList.add('dark');
 
-function addItem() {
-    const product = document.getElementById("product").value;
-    const price = parseFloat(document.getElementById("price").value);
-    const payment = document.getElementById("payment").value;
+function toggleDarkMode() {
+    isDark = !isDark;
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+}
 
-    if (!product || !price) {
-        alert("عمر الخانات أصاحبي!");
-        return;
+function handleAuth() {
+    const user = document.getElementById('authUser').value.trim();
+    const pass = document.getElementById('authPass').value.trim();
+    if (!user || !pass) return alert("Kamal l-7isab!");
+
+    let users = JSON.parse(localStorage.getItem('mm_users')) || {};
+
+    if (isLoginMode) {
+        if (users[user] && users[user].password === pass) login(user);
+        else alert("Ghalat!");
+    } else {
+        if (users[user]) return alert("Kayn deja!");
+        users[user] = { password: pass, data: [] };
+        localStorage.setItem('mm_users', JSON.stringify(users));
+        alert("Compte t-sawb!");
+        toggleAuthMode();
     }
-
-    const transaction = {
-        id: Date.now(),
-        date: new Date().toLocaleTimeString('ar-MA', {hour: '2-digit', minute:'2-digit'}),
-        product,
-        price,
-        payment
-    };
-
-    sales.push(transaction);
-    saveAndRender();
-
-    document.getElementById("product").value = "";
-    document.getElementById("price").value = "";
 }
 
-function deleteItem(id) {
-    sales = sales.filter(s => s.id !== id);
-    saveAndRender();
+function login(username) {
+    currentUser = username;
+    document.getElementById('authSection').classList.add('hidden');
+    document.getElementById('dashboardSection').classList.remove('hidden');
+    document.getElementById('welcomeMsg').innerText = username;
+    renderTable();
 }
 
-function saveAndRender() {
-    localStorage.setItem('mm_sales', JSON.stringify(sales));
-    renderTable(sales);
-    updateStats();
+function logout() { location.reload(); }
+
+function toggleAuthMode() {
+    isLoginMode = !isLoginMode;
+    document.getElementById('authTitle').innerText = isLoginMode ? "Se Connecter" : "Créer Compte";
+    document.getElementById('authToggle').innerText = isLoginMode ? "Créer un compte" : "Déjà inscrit ?";
 }
 
-function renderTable(data) {
-    const list = document.getElementById("list");
-    list.innerHTML = "";
+function saveData() {
+    const client = document.getElementById('client').value;
+    const article = document.getElementById('article').value;
+    const pAchat = parseFloat(document.getElementById('pAchat').value) || 0;
+    const pVente = parseFloat(document.getElementById('pVente').value) || 0;
+    const paye = parseFloat(document.getElementById('paye').value) || 0;
 
-    data.forEach(s => {
-        const row = document.createElement("tr");
-        if(s.payment === 'credit') row.className = 'row-credit';
-        
-        row.innerHTML = `
-            <td>${s.date}</td>
-            <td><strong>${s.product}</strong></td>
-            <td>${s.price.toFixed(2)} DH</td>
-            <td>${s.payment === 'cash' ? '✅ كاش' : '🔴 دين'}</td>
-            <td><button class="del-btn" onclick="deleteItem(${s.id})">🗑️</button></td>
-        `;
-        list.appendChild(row);
+    if (!client) return alert("Smiya daroria!");
+
+    let users = JSON.parse(localStorage.getItem('mm_users'));
+    users[currentUser].data.push({
+        id: Date.now(), client, article, pVente, 
+        reste: pVente - paye, profit: pVente - pAchat
     });
+
+    localStorage.setItem('mm_users', JSON.stringify(users));
+    renderTable();
+    ['client','article','pAchat','pVente','paye'].forEach(id => document.getElementById(id).value = "");
 }
 
-function updateStats() {
-    const cash = sales.filter(s => s.payment === 'cash').reduce((a, b) => a + b.price, 0);
-    const credit = sales.filter(s => s.payment === 'credit').reduce((a, b) => a + b.price, 0);
+function renderTable(filterData = null) {
+    let users = JSON.parse(localStorage.getItem('mm_users'));
+    let myData = filterData || users[currentUser].data;
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = "";
 
-    document.getElementById("cash").innerText = `${cash.toFixed(2)} DH`;
-    document.getElementById("credit").innerText = `${credit.toFixed(2)} DH`;
-    document.getElementById("total").innerText = `${(cash + credit).toFixed(2)} DH`;
+    let v=0, r=0, k=0;
+    myData.forEach(item => {
+        v+=item.pVente; r+=item.profit; k+=item.reste;
+        tbody.innerHTML += `
+            <tr class="hover:bg-indigo-50 dark:hover:bg-gray-800 transition">
+                <td class="p-3 font-bold">${item.client}</td>
+                <td class="p-3 font-bold ${item.reste > 0 ? 'text-red-500':'text-green-500'}">${item.reste}</td>
+                <td class="p-3 text-center">
+                    <button onclick="deleteRow(${item.id})" class="text-gray-400 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>`;
+    });
+    document.getElementById('statVentes').innerText = v.toFixed(0) + " DH";
+    document.getElementById('statRebeh').innerText = r.toFixed(0) + " DH";
+    document.getElementById('statKrida').innerText = k.toFixed(0) + " DH";
 }
 
-function filterItems() {
-    const term = document.getElementById("search").value.toLowerCase();
-    const filtered = sales.filter(s => s.product.toLowerCase().includes(term));
+function searchData() {
+    let users = JSON.parse(localStorage.getItem('mm_users'));
+    let term = document.getElementById('searchInput').value.toLowerCase();
+    let filtered = users[currentUser].data.filter(i => i.client.toLowerCase().includes(term));
     renderTable(filtered);
 }
 
-function clearAll() {
-    if(confirm("واش متأكد بغيتي تمسح كولشي؟")) {
-        sales = [];
-        saveAndRender();
-    }
+function deleteRow(id) {
+    let users = JSON.parse(localStorage.getItem('mm_users'));
+    users[currentUser].data = users[currentUser].data.filter(i => i.id !== id);
+    localStorage.setItem('mm_users', JSON.stringify(users));
+    renderTable();
 }
-
-// Initial Run
-renderTable(sales);
-updateStats();

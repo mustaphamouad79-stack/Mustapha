@@ -1,70 +1,108 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M.M Pro POS</title>
+    <title>M.M COMPTABLE - Pro & Mobile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-100 transition-colors duration-300" id="bodyTag">
 
-    <div class="app-wrapper">
-        <aside class="sidebar">
-            <div class="brand">M.M<span>STORE</span></div>
-            <nav>
-                <div class="nav-item active">📊 Dashboard</div>
-                <div class="nav-item" onclick="window.print()">🖨️ طباعة وصل</div>
-                <div class="nav-item" onclick="clearAll()">🧹 مسح البيانات</div>
-            </nav>
-        </aside>
-
-        <main class="content">
-            <header class="top-bar">
-                <input type="text" id="search" onkeyup="filterItems()" placeholder="🔍 بحث عن منتج...">
-                <div class="date" id="currentDate"></div>
-            </header>
-
-            <div class="stats-grid">
-                <div class="stat-box cash">
-                    <p>المبيعات نقداً</p>
-                    <h2 id="cash">0.00 DH</h2>
+    <div id="authSection" class="min-h-screen flex items-center justify-center p-4">
+        <div class="auth-card p-8 rounded-3xl shadow-2xl w-full max-w-md border-t-8 border-indigo-600">
+            <div class="text-center mb-6">
+                <div class="inline-block bg-yellow-500 text-black px-4 py-1 rounded-xl font-black text-2xl mb-2">M.M</div>
+                <h2 class="text-2xl font-bold" id="authTitle">Se Connecter</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="input-group">
+                    <label>Nom / الإسم</label>
+                    <input type="text" id="authUser" placeholder="Utilisateur">
                 </div>
-                <div class="stat-box credit">
-                    <p>ديون (Crédit)</p>
-                    <h2 id="credit">0.00 DH</h2>
+                <div class="input-group">
+                    <label>Password / الكود</label>
+                    <input type="password" id="authPass" placeholder="••••••••">
                 </div>
-                <div class="stat-box total">
-                    <p>المجموع العام</p>
-                    <h2 id="total">0.00 DH</h2>
+                <button onclick="handleAuth()" class="btn-primary w-full py-4 font-bold">DÉMARRER</button>
+                <p class="text-center text-sm text-gray-500 cursor-pointer" onclick="toggleAuthMode()" id="authToggle">Créer un compte</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboardSection" class="hidden">
+        <header class="main-header sticky top-0 z-50 px-4 py-3">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="bg-yellow-500 text-black px-2 py-1 rounded font-bold">M.M</span>
+                    <span class="text-white font-bold hidden sm:inline uppercase">Comptable</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleDarkMode()" class="text-white p-2 rounded-full hover:bg-gray-700">
+                        <i id="themeIcon" class="fas fa-moon"></i>
+                    </button>
+                    <span id="welcomeMsg" class="text-white text-sm font-bold border-l pl-3 border-gray-600"></span>
+                    <button onclick="logout()" class="text-red-400 p-2"><i class="fas fa-power-off"></i></button>
                 </div>
             </div>
+        </header>
 
-            <section class="entry-section">
-                <div class="glass-form">
-                    <input type="text" id="product" placeholder="اسم المنتج">
-                    <input type="number" id="price" placeholder="الثمن">
-                    <select id="payment">
-                        <option value="cash">Cash (كاش)</option>
-                        <option value="credit">Crédit (دين)</option>
-                    </select>
-                    <button class="primary-btn" onclick="addItem()">إضافة البيع +</button>
+        <main class="container mx-auto p-4 md:p-8">
+            <div class="flex flex-col xl:flex-row gap-6">
+                
+                <div class="w-full xl:w-1/3">
+                    <div class="content-card p-6 rounded-2xl shadow-xl">
+                        <h2 class="text-lg font-bold mb-4 flex justify-between items-center">
+                            <span>Nouveau / جديد</span>
+                            <i class="fas fa-plus-circle text-indigo-500"></i>
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-4">
+                            <div class="input-group"><label>Client</label><input type="text" id="client"></div>
+                            <div class="input-group"><label>Article</label><input type="text" id="article"></div>
+                            <div class="input-group"><label>Prix Achat</label><input type="number" id="pAchat"></div>
+                            <div class="input-group"><label>Prix Vente</label><input type="number" id="pVente"></div>
+                            <div class="input-group md:col-span-2 xl:col-span-1"><label>Payé</label><input type="number" id="paye" class="font-bold text-green-600"></div>
+                        </div>
+                        <button onclick="saveData()" class="btn-primary w-full py-3 mt-6 uppercase font-black">Enregistrer</button>
+                    </div>
                 </div>
-            </section>
 
-            <div class="table-wrapper">
-                <table id="salesTable">
-                    <thead>
-                        <tr>
-                            <th>التاريخ</th>
-                            <th>المنتج</th>
-                            <th>الثمن</th>
-                            <th>الحالة</th>
-                            <th>إجراء</th>
-                        </tr>
-                    </thead>
-                    <tbody id="list"></tbody>
-                </table>
+                <div class="w-full xl:w-2/3 space-y-6">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        <div class="stat-card border-blue-500 bg-white p-4">
+                            <p class="text-[10px]">Ventes</p>
+                            <h3 id="statVentes" class="text-lg">0</h3>
+                        </div>
+                        <div class="stat-card border-green-500 bg-white p-4">
+                            <p class="text-[10px]">Arbah</p>
+                            <h3 id="statRebeh" class="text-lg text-green-600">0</h3>
+                        </div>
+                        <div class="stat-card border-red-500 bg-white p-4 col-span-2 md:col-span-1">
+                            <p class="text-[10px]">Krida</p>
+                            <h3 id="statKrida" class="text-lg text-red-600">0</h3>
+                        </div>
+                    </div>
+
+                    <div class="content-card rounded-2xl shadow-xl overflow-hidden">
+                        <div class="p-4 border-b flex items-center">
+                            <i class="fas fa-search mr-3 text-gray-400"></i>
+                            <input type="text" id="searchInput" onkeyup="searchData()" class="w-full bg-transparent outline-none" placeholder="Chercher...">
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-gray-800 text-white uppercase text-[10px]">
+                                    <tr>
+                                        <th class="p-3">Client</th>
+                                        <th class="p-3">Reste</th>
+                                        <th class="p-3 text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody" class="divide-y"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
