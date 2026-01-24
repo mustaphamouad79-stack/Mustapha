@@ -3,66 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M.M - Système de Gestion</title>
+    <title>M.M Pro POS</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1><span class="logo">M.M</span> POS - إدارة المبيعات</h1>
-        </header>
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <div class="brand">M.M<span>STORE</span></div>
+            <nav>
+                <div class="nav-item active">📊 Dashboard</div>
+                <div class="nav-item" onclick="window.print()">🖨️ طباعة وصل</div>
+                <div class="nav-item" onclick="clearAll()">🧹 مسح البيانات</div>
+            </nav>
+        </aside>
 
-        <div class="pos-card">
-            <div class="form-grid">
-                <div class="input-group">
-                    <label>المنتج / Produit</label>
-                    <input type="text" id="product" placeholder="اسم المنتج">
+        <main class="content">
+            <header class="top-bar">
+                <input type="text" id="search" onkeyup="filterItems()" placeholder="🔍 بحث عن منتج...">
+                <div class="date" id="currentDate"></div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-box cash">
+                    <p>المبيعات نقداً</p>
+                    <h2 id="cash">0.00 DH</h2>
                 </div>
-                <div class="input-group">
-                    <label>الثمن / Prix (DH)</label>
-                    <input type="number" id="price" placeholder="0.00">
+                <div class="stat-box credit">
+                    <p>ديون (Crédit)</p>
+                    <h2 id="credit">0.00 DH</h2>
                 </div>
-                <div class="input-group">
-                    <label>طريقة الدفع / Paiement</label>
-                    <select id="payment">
-                        <option value="cash">نقداً (Cash)</option>
-                        <option value="credit">دين (Crédit)</option>
-                    </select>
+                <div class="stat-box total">
+                    <p>المجموع العام</p>
+                    <h2 id="total">0.00 DH</h2>
                 </div>
-                <button class="add-btn" onclick="addItem()">إضافة لللقائمة</button>
             </div>
 
-            <div class="table-container">
-                <table>
+            <section class="entry-section">
+                <div class="glass-form">
+                    <input type="text" id="product" placeholder="اسم المنتج">
+                    <input type="number" id="price" placeholder="الثمن">
+                    <select id="payment">
+                        <option value="cash">Cash (كاش)</option>
+                        <option value="credit">Crédit (دين)</option>
+                    </select>
+                    <button class="primary-btn" onclick="addItem()">إضافة البيع +</button>
+                </div>
+            </section>
+
+            <div class="table-wrapper">
+                <table id="salesTable">
                     <thead>
                         <tr>
+                            <th>التاريخ</th>
                             <th>المنتج</th>
                             <th>الثمن</th>
-                            <th>الدفع</th>
-                            <th>حذف</th>
+                            <th>الحالة</th>
+                            <th>إجراء</th>
                         </tr>
                     </thead>
                     <tbody id="list"></tbody>
                 </table>
             </div>
-
-            <div class="dashboard">
-                <div class="stat-card">
-                    <span>Total Cash / الكاش</span>
-                    <h3 id="cash">0 DH</h3>
-                </div>
-                <div class="stat-card">
-                    <span>Total Crédit / الكريدي</span>
-                    <h3 id="credit">0 DH</h3>
-                </div>
-                <div class="stat-card total-main">
-                    <span>Total Général / المجموع</span>
-                    <h2 id="total">0 DH</h2>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 
     <script src="script.js"></script>
